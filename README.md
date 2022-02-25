@@ -22,3 +22,6 @@ The CLI is exactly the same (referenced), but the parent path is 'safe-peering',
 /network-instance default protocols bgp
 neighbor 1.2.3.4 !!! Provisioned through BGP safeguard on 2022-02-25 at 11:00am
 ```
+
+## Resource Public Key Infrastructure (RPKI) route validator
+In this setup, the RPKI validator/route reflector is implemented using static RPKI entries on an SR OS router. Those skilled in the art will appreciate that this could just as well use a dynamic RPKI source
