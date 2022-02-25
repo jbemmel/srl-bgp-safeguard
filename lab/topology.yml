@@ -1,0 +1,22 @@
+module: [ bgp ]
+
+provider: clab
+
+defaults.device: srlinux
+
+nodes:
+  srl:
+   bgp.as: 65001
+   bgp.originate: [ 10.42.42.0/24, 10.66.60.0/24 ] # Good, bad
+
+  rpki_rr_validator:
+   device: sros
+   bgp.as: 65100
+   bgp.rr: True # TODO eBGP RR use case, else AS path is not sent
+   config: [ sros-rpki.j2 ]
+
+  peer:
+    bgp.as: 65002
+    bgp.originate: [ 0.0.0.0/0 ]
+
+links: [ srl-rpki_rr_validator, srl-peer ]
