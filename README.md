@@ -16,8 +16,8 @@ neighbor 1.2.3.4
 The CLI is exactly the same (referenced), but the parent path is 'safe-peering', a custom extension
 
 2. The agent receives a config update event from the NDK, and peers with a configured internal route clearance server first
-3. After validating all the exported routes, the EBGP peering clearance server sends a default route, to signal "OK"
-4. The agent closes the EBGP clearance server session, and modifies the local config to add the 'real' BGP peer IP:
+3. The BGP peering clearance server is a route reflector configured with RPKI validation. It validates all the exported routes, and reflects back the valid ones. By comparing the count of advertised prefixes versus received prefixes, the agent can check that all routes passed verification
+4. The agent closes the BGP clearance server session, and modifies the local config to add the 'real' BGP peer IP:
 ```
 /network-instance default protocols bgp
 neighbor 1.2.3.4 !!! Provisioned through BGP safeguard on 2022-02-25 at 11:00am
